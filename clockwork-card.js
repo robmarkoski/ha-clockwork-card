@@ -47,11 +47,13 @@ class ClockWorkCard extends HTMLElement {
             day : 'numeric',
             month : 'long'
         });
-        var i = _other_locales.length;
+
         var otherclocks = `
             <div class = "other_clocks">
             `;
-        for (i= 0; i < 3; i++) {
+        var i;
+        var j = _other_locales.length;
+        for (i= 0; i < j; i++) {
             var _tztime = _date_time.toLocaleTimeString(_locale, {
                 hour: 'numeric',
                 minute: 'numeric',
