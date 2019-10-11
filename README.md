@@ -20,6 +20,7 @@ Use at own risk, absolutely minimal testing has been completed. Milage may very.
 To install add it to your custom lovelace folder and then reference it accordingly
 
 ```yaml
+resource:
   - url: /local/custom-lovelace/clockwork-card.js
     type: js
 ```
@@ -27,9 +28,9 @@ To install add it to your custom lovelace folder and then reference it according
 ## CONFIGURATION
 
 Then in your lovelace configuration edit accordingly.
-It requires you have an existing [date_time_iso](https://www.home-assistant.io/integrations/time_date/) sensor.
+It requires you have an existing [date_time_iso](https://www.home-assistant.io/integrations/time_date/) sensor. (Actually it doesnt read note below)
 
-It should be pretty self explanatory.
+The Rest should be pretty self explanatory.
 
 ```Yaml
   - type: 'custom:clockwork-card'
@@ -41,3 +42,16 @@ It should be pretty self explanatory.
       - "Australia/Sydney"
       - "America/Los_Angeles"
 ```
+
+
+### iPhone/Safari
+ So safari (i.e. mac and ios) has a quirky *feature* where it imports date/time as UTC time even when not specifically expressed. So on your iPhone or on a Mac, everything will be out by exactly your timezone.
+
+So in this case, dont use an entity. However the time shown will be LOCAL for your device. In other words, if your phone is in a different timezone, it will show that time, and not the time wherever your HomeAssistant instance is.
+
+Will try to fix this.
+
+## TODO LIST
+    [ ] Fix iPhone issue.
+    [ ] Integrate with HACS.
+    [ ] Clean up README.

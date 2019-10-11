@@ -1,5 +1,4 @@
-// Taken from https://community.home-assistant.io/t/palm-springs-theme/103533
-// Heavily modified to the point of not being similar.
+// Clockwork Card
 // https://github.com/robmarkoski/ha-clockwork-card
 
 class ClockWorkCard extends HTMLElement {
@@ -14,55 +13,72 @@ class ClockWorkCard extends HTMLElement {
     set hass(hass) {
 
         const config = this.config;
-
-        const entityId = this.config.entity;
-        var _other_locales = config.other_time;
-        const state = hass.states[entityId];
-        const stateStr = state ? state.state : "Unavailable";
         const locale = config.locale;
         const _locale = locale ? locale : undefined;
-        //console.log(locale)
-        //console.log("Other Locales: " + _other_locales[1]);
-        /* 
-        This Builds Date. Requires to have date: and time: Set in config.
-        This may be used in future build but probably not.
-        var _dateState = hass.states[config.date].state;
+        var _other_timezones = config.other_time;
+        
+        const entityId = config.entity;
 
-        var _date_time = new Date(_dateState + "T" + hass.states[this.config.time].state);
-        */
-        if (stateStr == "Unavailable") {
-            throw new Error("Sensor State Unavailable");
+        // Need to check for safari as safari dates are parsed as being UTC when not specified.
+        // Therefore all dates are adjusted
+        //var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+        if (entityId) {
+            const state = hass.states[entityId];
+            const stateStr = state ? state.state : "Unavailable";
+            if (stateStr == "Unavailable") {
+                throw new Error("Sensor State Unavailable");
+            }
+            // if (isSafari) {
+            //     var _stateStr_utc = new Date(stateStr).toLocaleString(locale, {timeZone: "Etc/UTC"});
+            //     var _date_time = new Date(_stateStr_utc);
+            // } else {
+            //     var _date_time = new Date(stateStr);
+            // }
+            var _date_time = new Date(stateStr);
+        } else {
+            var _date_time = new Date();
         }
-        var _date_time = new Date(stateStr);
+
+
+
+        
         if (_date_time == "Invalid Date") {
             throw new Error("Invalid date. Ensure its a ISO Date")
         }
-
+        
+        //Format the Time
         var _time = _date_time.toLocaleTimeString(_locale, {
             hour: 'numeric',
             minute: 'numeric'
         });
+
+        //Format the Date
         var _date = _date_time.toLocaleDateString(_locale, {
             weekday : 'long',
             day : 'numeric',
             month : 'long'
         });
 
+        //Build List of Other Timezones
+        //
         var otherclocks = `
             <div class = "other_clocks">
             `;
         var i;
-        var j = _other_locales.length;
+        var j = _other_timezones.length; //TODO: Recommend max 3.
         for (i= 0; i < j; i++) {
+            //Format other timezones.
             var _tztime = _date_time.toLocaleTimeString(_locale, {
                 hour: 'numeric',
                 minute: 'numeric',
-                timeZone: _other_locales[i],
+                timeZone: _other_timezones[i],
                 weekday: 'short'
             }); 
             
+            // List other Timezones.
             otherclocks = otherclocks + `
-                <div class="tz_locale">${_other_locales[i]} </div> 
+                <div class="tz_locale">${_other_timezones[i]} </div> 
                 <div class="otime"> ${_tztime} </div>
             `;
             //console.log(_tztime);
@@ -71,6 +87,8 @@ class ClockWorkCard extends HTMLElement {
             </div>
             `;
         /*console.log(otherclocks);*/
+
+        // Build Current Local Time
         var local_time = `
             <div class="clock">
                 <div class="time" id="time">${_time}</div>
@@ -80,16 +98,18 @@ class ClockWorkCard extends HTMLElement {
         
         var clock_contents = local_time + otherclocks;
        /* console.log("Clock Contents: " + clock_contents);*/
-        this.shadowRoot.getElementById('container').innerHTML = clock_contents;
+        
+       this.shadowRoot.getElementById('container').innerHTML = clock_contents;
     }
 
     /* This is called only when config is updated */
     setConfig(config) {
-        if (!config.entity) {
-            throw new Error('You must define an entity')
-        }
+        // TODO: Add some more error checking.
+        // if (!config.entity) {
+        //     throw new Error('You must define an entity')
+        // }
         
-        /*console.log(_other_locales);*/
+        /*console.log(_other_timezones);*/
         const root = this.shadowRoot;
         if (root.lastChild) root.removeChild(root.lastChild);
 
@@ -103,13 +123,18 @@ class ClockWorkCard extends HTMLElement {
             .container {
                 padding: 10px 16px 5px;
                 display:flex;
+                flex-flow: row wrap;
+                justify-content: space-around;
+                align-items: flex-start;
             }
             .clock {
-                width:100%;
-                padding: 10px 5px 10px 0px;
+                
+                padding: 5px 5px 5px 0px;
+                margin: auto;
             }
             .other_clocks {
                 float: right;
+                margin: auto;
 
             }
             .otime {
@@ -164,4 +189,4 @@ class ClockWorkCard extends HTMLElement {
     }
 }
   
-  customElements.define('clockwork-card', ClockWorkCard);
+customElements.define('clockwork-card', ClockWorkCard);
