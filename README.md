@@ -1,5 +1,7 @@
 # Clockwork Card
 
+**Current Version:** 0.1.1
+
 This is a simple little custom lovelace element that shows a clock and some extra timezones for Home Assistant.
 
 It may break, it may work. For now, it works.
@@ -54,4 +56,5 @@ Will try to fix this.
 ## TODO LIST
     [ ] Fix iPhone issue.
     [ ] Integrate with HACS.
-    [ ] Clean up README.
+    [ ] Clean up README and more detailed install 
+    [ ] Have ability to choose whether to show local device time or HomeAssistant time.
