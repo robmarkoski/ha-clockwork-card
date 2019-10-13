@@ -58,3 +58,6 @@ Will try to fix this.
     [ ] Integrate with HACS.
     [ ] Clean up README and more detailed install 
     [ ] Have ability to choose whether to show local device time or HomeAssistant time.
+
+
+[![Buy Me A Coffee](https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/custom_images/white_img.png)](https://www.buymeacoffee.com/pJ9AUGuoE)
