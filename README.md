@@ -1,6 +1,6 @@
 # Clockwork Card
 
-**Current Version:** 0.1.1
+**Current Version:** 0.1.2
 
 This is a simple little custom lovelace element that shows a clock and some extra timezones for Home Assistant.
 
