@@ -121,7 +121,7 @@ class ClockWorkCard extends HTMLElement {
   
         style.textContent = `
             .container {
-                padding: 10px 16px 5px;
+                padding: 5px 5px 5px;
                 display:flex;
                 flex-flow: row wrap;
                 justify-content: space-around;
@@ -138,16 +138,16 @@ class ClockWorkCard extends HTMLElement {
 
             }
             .otime {
-                padding: 0px 10px 2px;
-                font-size: 1.1em;
+                padding: 0px 5px 2px;
+                font-size: 14px;
                 font-family: var(--paper-font-headline_-_font-family);
                 letter-spacing: var(--paper-font-headline_-_letter-spacing);
                 text-rendering: var(--paper-font-common-expensive-kerning_-_text-rendering);
             }
             .tz_locale {
-                padding: 0px 10px 1px;
+                padding: 0px 5px 1px;
                 color: var(--secondary-text-color);
-                font-size: 0.82em;
+                font-size: 11px;
                 font-family: var(--paper-font-headline_-_font-family);
                 letter-spacing: var(--paper-font-headline_-_letter-spacing);
                 text-rendering: var(--paper-font-common-expensive-kerning_-_text-rendering);
@@ -156,7 +156,7 @@ class ClockWorkCard extends HTMLElement {
                 padding: 
                 font-family: var(--paper-font-headline_-_font-family);
                 -webkit-font-smoothing: var(--paper-font-headline_-_-webkit-font-smoothing);
-                font-size: 4.1em;
+                font-size: 56px;
                 font-weight: var(--paper-font-headline_-_font-weight);
                 letter-spacing: var(--paper-font-headline_-_letter-spacing);
                 line-height: 1em;
@@ -166,7 +166,7 @@ class ClockWorkCard extends HTMLElement {
 
                 font-family: var(--paper-font-headline_-_font-family);
                 -webkit-font-smoothing: var(--paper-font-headline_-_-webkit-font-smoothing);
-                font-size: 1.7em;
+                font-size: 24px;
                 font-weight: var(--paper-font-headline_-_font-weight);
                 letter-spacing: var(--paper-font-headline_-_letter-spacing);
                 line-height: var(--paper-font-headline_-_line-height);
